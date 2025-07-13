@@ -62,11 +62,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Portfolio specific colors
+				// Portfolio specific colors with purple theme
+				'purple-primary': 'hsl(var(--purple-primary))',
+				'purple-secondary': 'hsl(var(--purple-secondary))',
+				'purple-dark': 'hsl(var(--purple-dark))',
 				'hero-gradient-start': 'hsl(var(--hero-gradient-start))',
 				'hero-gradient-end': 'hsl(var(--hero-gradient-end))',
+				'accent-purple': 'hsl(var(--accent-purple))',
 				'accent-blue': 'hsl(var(--accent-blue))',
-				'accent-pink': 'hsl(var(--accent-pink))',
 				'glass-bg': 'hsl(var(--glass-bg))',
 				'glass-border': 'hsl(var(--glass-border))'
 			},

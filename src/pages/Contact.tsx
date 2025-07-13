@@ -50,14 +50,36 @@ const Contact = () => {
   ];
 
   return (
-    <PageTransition>
+    <PageTransition animationType="scale">
       <div className="relative min-h-screen bg-background overflow-hidden">
-        <ParticleBackground particleCount={60} />
+        <ParticleBackground />
         <Navigation />
         
-        {/* Gradient Blur Elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-accent-pink/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-blue/20 rounded-full blur-3xl animate-pulse" />
+        {/* Animated Background Elements */}
+        <motion.div 
+          className="absolute top-20 left-10 w-72 h-72 bg-purple-primary/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 right-10 w-96 h-96 bg-purple-secondary/25 rounded-full blur-3xl"
+          animate={{
+            scale: [1.3, 1, 1.3],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
         
         <div className="relative z-10 container mx-auto px-6 py-24">
           <motion.div
@@ -133,9 +155,9 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-primary hover:bg-primary/90"
+                  className="w-full bg-primary hover:bg-primary/90 group"
                 >
-                  <Send className="w-4 h-4 mr-2" />
+                  <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
                   Send Message
                 </Button>
               </form>
@@ -159,12 +181,13 @@ const Contact = () => {
                     <p className="text-muted-foreground">Let's start a conversation</p>
                   </div>
                 </div>
-                <a
+                <motion.a
                   href="mailto:ajithkumar17001ak@gmail.com"
-                  className="text-primary hover:text-primary/80 transition-smooth font-medium"
+                  className="text-primary hover:text-primary/80 transition-smooth font-medium block"
+                  whileHover={{ scale: 1.05 }}
                 >
                   ajithkumar17001ak@gmail.com
-                </a>
+                </motion.a>
               </div>
 
               {/* Social Links */}
@@ -184,8 +207,8 @@ const Contact = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <div className={`w-10 h-10 bg-gradient-to-r ${link.gradient} rounded-lg flex items-center justify-center mr-3`}>
-                          <Icon className="w-5 h-5 text-white" />
+                        <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary/30 transition-colors">
+                          <Icon className="w-5 h-5 text-primary" />
                         </div>
                         <span className="font-medium group-hover:text-primary transition-smooth">
                           {link.name}
@@ -208,7 +231,7 @@ const Contact = () => {
                   I'm always excited to work on innovative eLearning projects and bring creative solutions to life.
                 </p>
                 <div className="flex justify-center">
-                  <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent-blue rounded-full"></div>
+                  <div className="w-16 h-1 bg-gradient-to-r from-primary to-purple-secondary rounded-full"></div>
                 </div>
               </motion.div>
             </motion.div>

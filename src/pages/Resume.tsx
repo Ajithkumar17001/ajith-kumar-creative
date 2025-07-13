@@ -12,14 +12,36 @@ const Resume = () => {
   };
 
   return (
-    <PageTransition>
+    <PageTransition animationType="rotate">
       <div className="relative min-h-screen bg-background overflow-hidden">
-        <ParticleBackground particleCount={60} />
+        <ParticleBackground />
         <Navigation />
         
-        {/* Gradient Blur Elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent-blue/20 rounded-full blur-3xl animate-pulse" />
+        {/* Animated Background Elements */}
+        <motion.div 
+          className="absolute top-20 right-10 w-72 h-72 bg-purple-primary/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 left-10 w-96 h-96 bg-purple-secondary/25 rounded-full blur-3xl"
+          animate={{
+            scale: [1.3, 1, 1.3],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
         
         <div className="relative z-10 container mx-auto px-6 py-24">
           <motion.div

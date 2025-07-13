@@ -1,58 +1,95 @@
 import { motion } from "framer-motion";
-import { Laptop, Cloud, Palette, Settings, Video, FileText } from "lucide-react";
+import { Laptop, Cloud, Palette, Settings, Video, FileText, Filter } from "lucide-react";
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import ParticleBackground from "@/components/ParticleBackground";
 import PageTransition from "@/components/PageTransition";
 
 const Skills = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  
   const skillCategories = [
     {
       title: "E-Learning Development Tools",
+      category: "Design Tools",
       icon: Laptop,
       skills: ["Articulate Storyline", "Adobe Captivate", "Articulate Rise", "Vyond"],
-      gradient: "from-primary to-accent-blue"
+      gradient: "from-purple-primary/20 to-purple-secondary/20"
     },
     {
       title: "LMS Platforms",
+      category: "LMS",
       icon: Cloud,
       skills: ["Moodle", "Scorm Cloud"],
-      gradient: "from-accent-blue to-accent-pink"
+      gradient: "from-purple-secondary/20 to-purple-primary/20"
     },
     {
       title: "Multimedia & Design",
+      category: "Design Tools",
       icon: Palette,
       skills: ["Photoshop", "Illustrator", "Adobe XD", "Canva"],
-      gradient: "from-accent-pink to-primary"
+      gradient: "from-purple-primary/20 to-purple-dark/20"
     },
     {
       title: "Project Management",
+      category: "Other",
       icon: Settings,
       skills: ["Jira"],
-      gradient: "from-primary to-accent-blue"
+      gradient: "from-purple-dark/20 to-purple-primary/20"
     },
     {
       title: "Video/Audio Tools",
+      category: "Video",
       icon: Video,
       skills: ["After Effects", "Premiere Pro", "Camtasia", "Audition"],
-      gradient: "from-accent-blue to-accent-pink"
+      gradient: "from-purple-secondary/20 to-purple-dark/20"
     },
     {
-      title: "Other",
+      title: "Other Tools",
+      category: "Other",
       icon: FileText,
       skills: ["Microsoft Office Suite"],
-      gradient: "from-accent-pink to-primary"
+      gradient: "from-purple-primary/20 to-purple-secondary/20"
     }
   ];
 
+  const filters = ["All", "Design Tools", "LMS", "Video", "Other"];
+  
+  const filteredCategories = activeFilter === "All" 
+    ? skillCategories 
+    : skillCategories.filter(cat => cat.category === activeFilter);
+
   return (
-    <PageTransition>
+    <PageTransition animationType="scale">
       <div className="relative min-h-screen bg-background overflow-hidden">
-        <ParticleBackground particleCount={60} />
+        <ParticleBackground />
         <Navigation />
         
-        {/* Gradient Blur Elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-accent-pink/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        {/* Animated Background Elements */}
+        <motion.div 
+          className="absolute top-20 left-10 w-72 h-72 bg-purple-primary/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 right-10 w-96 h-96 bg-purple-secondary/25 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.1, 0.4, 0.1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
         
         <div className="relative z-10 container mx-auto px-6 py-24">
           <motion.div
@@ -69,8 +106,30 @@ const Skills = () => {
             </p>
           </motion.div>
 
+          {/* Filter Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-4 mb-12"
+          >
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeFilter === filter
+                    ? "bg-primary text-primary-foreground shadow-lg"
+                    : "bg-glass-bg/50 hover:bg-glass-bg/80 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </motion.div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {skillCategories.map((category, index) => {
+            {filteredCategories.map((category, index) => {
               const Icon = category.icon;
               
               return (
@@ -79,7 +138,7 @@ const Skills = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="glass-card p-6 group hover:animate-glow transition-smooth"
+                  className="skill-card group"
                 >
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.gradient} flex items-center justify-center mb-4`}>
                     <Icon className="w-6 h-6 text-white" />

@@ -8,65 +8,70 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark Portfolio Theme */
-    --background: 222 84% 4.9%;
+    /* Dark Portfolio Theme with High Contrast Purple */
+    --background: 218 23% 6%;
     --foreground: 210 40% 98%;
 
-    --card: 222 84% 4.9%;
+    --card: 220 23% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 84% 4.9%;
+    --popover: 220 23% 8%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 271 91% 65%;
+    --primary-foreground: 218 23% 6%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 14% 14%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 220 14% 14%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 271 91% 65%;
+    --accent-foreground: 218 23% 6%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 263 70% 50%;
+    --border: 220 14% 14%;
+    --input: 220 14% 14%;
+    --ring: 271 91% 65%;
 
     --radius: 0.75rem;
 
-    /* Portfolio specific colors */
-    --hero-gradient-start: 263 70% 50%;
-    --hero-gradient-end: 310 70% 45%;
+    /* Portfolio specific colors with high contrast purple */
+    --purple-primary: 271 91% 65%;
+    --purple-secondary: 271 91% 75%;
+    --purple-dark: 271 81% 45%;
+    --hero-gradient-start: 271 91% 65%;
+    --hero-gradient-end: 280 91% 70%;
+    --accent-purple: 271 91% 65%;
     --accent-blue: 207 90% 54%;
-    --accent-pink: 330 85% 60%;
-    --glass-bg: 217.2 32.6% 17.5%;
-    --glass-border: 215 20.2% 25%;
+    --glass-bg: 220 23% 8%;
+    --glass-border: 220 14% 20%;
     
-    /* Gradients */
+    /* Enhanced gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--hero-gradient-start)), hsl(var(--hero-gradient-end)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent-blue)), hsl(var(--accent-pink)));
-    --gradient-glass: linear-gradient(135deg, hsla(var(--glass-bg), 0.8), hsla(var(--glass-bg), 0.4));
+    --gradient-purple: linear-gradient(135deg, hsl(var(--purple-primary)), hsl(var(--purple-secondary)));
+    --gradient-glass: linear-gradient(135deg, hsla(var(--glass-bg), 0.9), hsla(var(--glass-bg), 0.5));
     
-    /* Shadows */
-    --shadow-glass: 0 8px 32px hsla(var(--primary), 0.3);
-    --shadow-glow: 0 0 40px hsla(var(--primary), 0.4);
+    /* Enhanced shadows with purple glow */
+    --shadow-glass: 0 8px 32px hsla(var(--purple-primary), 0.2);
+    --shadow-purple-glow: 0 0 60px hsla(var(--purple-primary), 0.4);
+    --shadow-intense-glow: 0 0 100px hsla(var(--purple-primary), 0.6);
     
-    /* Animations */
+    /* Smooth animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --sidebar-background: 222 84% 4.9%;
+    --sidebar-background: 218 23% 6%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 263 70% 50%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-primary: 271 91% 65%;
+    --sidebar-primary-foreground: 218 23% 6%;
+    --sidebar-accent: 220 14% 14%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 263 70% 50%;
+    --sidebar-border: 220 14% 14%;
+    --sidebar-ring: 271 91% 65%;
   }
 
   .dark {
@@ -120,15 +125,16 @@ All colors MUST be HSL.
 
 @layer components {
   .glass-card {
-    @apply bg-gradient-to-br from-glass-bg/80 to-glass-bg/40 backdrop-blur-md border border-glass-border/50 rounded-lg shadow-xl;
+    @apply bg-gradient-to-br from-glass-bg/90 to-glass-bg/50 backdrop-blur-lg border border-glass-border/60 rounded-xl;
+    box-shadow: var(--shadow-glass);
   }
   
   .hero-gradient {
     background: var(--gradient-primary);
   }
   
-  .accent-gradient {
-    background: var(--gradient-accent);
+  .purple-gradient {
+    background: var(--gradient-purple);
   }
   
   .gradient-text {
@@ -143,7 +149,33 @@ All colors MUST be HSL.
   }
   
   .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
+    animation: purple-glow 3s ease-in-out infinite alternate;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .cursor-interactive {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .project-card {
+    @apply glass-card transition-all duration-300 ease-out cursor-pointer;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-intense-glow);
+  }
+  
+  .skill-card {
+    @apply glass-card p-6 transition-all duration-300 ease-out;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-purple-glow);
   }
 }
 
@@ -175,6 +207,24 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes purple-glow {
+  from {
+    box-shadow: var(--shadow-glass);
+  }
+  to {
+    box-shadow: var(--shadow-purple-glow);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: var(--shadow-glass);
+  }
+  50% {
+    box-shadow: var(--shadow-intense-glow);
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -186,6 +236,66 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
 .animate-fadeInUp {
   animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out;
+}
+
+.animate-rotateIn {
+  animation: rotateIn 0.8s ease-out;
 }

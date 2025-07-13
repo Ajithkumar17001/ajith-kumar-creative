@@ -27,15 +27,49 @@ const Index = () => {
   };
 
   return (
-    <PageTransition>
+    <PageTransition animationType="fadeUp">
       <div className="relative min-h-screen bg-background overflow-hidden">
         <ParticleBackground />
         <Navigation />
         
-        {/* Gradient Blur Elements */}
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-10 w-72 h-72 bg-accent-blue/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-pink/20 rounded-full blur-3xl animate-pulse" />
+        {/* Animated Gradient Blur Elements */}
+        <motion.div 
+          className="absolute top-1/4 left-10 w-96 h-96 bg-primary/40 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-10 w-72 h-72 bg-purple-secondary/30 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-purple/25 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            rotate: [0, 180, 360],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
         
         <div className="relative z-10 container mx-auto px-6 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
