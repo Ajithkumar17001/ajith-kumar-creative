@@ -61,7 +61,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Portfolio specific colors
+				'hero-gradient-start': 'hsl(var(--hero-gradient-start))',
+				'hero-gradient-end': 'hsl(var(--hero-gradient-end))',
+				'accent-blue': 'hsl(var(--accent-blue))',
+				'accent-pink': 'hsl(var(--accent-pink))',
+				'glass-bg': 'hsl(var(--glass-bg))',
+				'glass-border': 'hsl(var(--glass-border))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
