@@ -1,39 +1,68 @@
 import { motion } from "framer-motion";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Home, User, FolderOpen, Award, FileText, Mail } from "lucide-react";
 
 const Navigation = () => {
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { path: "/", label: "Home", icon: Home },
-    { path: "/about", label: "About", icon: User },
-    { path: "/projects", label: "Projects", icon: FolderOpen },
-    { path: "/skills", label: "Skills", icon: Award },
-    { path: "/resume", label: "Resume", icon: FileText },
-    { path: "/contact", label: "Contact", icon: Mail },
+    { id: "home", label: "Home", icon: Home },
+    { id: "about", label: "About", icon: User },
+    { id: "projects", label: "Projects", icon: FolderOpen },
+    { id: "skills", label: "Skills", icon: Award },
+    { id: "resume", label: "Resume", icon: FileText },
+    { id: "contact", label: "Contact", icon: Mail },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => document.getElementById(item.id));
+      const scrollY = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollY) {
+          setActiveSection(navItems[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
 
   return (
     <motion.nav
-      className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
+      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-auto"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="glass-card px-6 py-3">
-        <div className="flex space-x-8">
-          {navItems.map(({ path, label, icon: Icon }) => {
-            const isActive = location.pathname === path;
+      <div className="glass-card px-4 py-3 mx-4">
+        <div className="flex space-x-2 md:space-x-6">
+          {navItems.map(({ id, label, icon: Icon }) => {
+            const isActive = activeSection === id;
             
             return (
-              <Link
-                key={path}
-                to={path}
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
                 className="relative group"
               >
                 <motion.div
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-smooth ${
+                  className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-3 py-2 rounded-lg transition-smooth ${
                     isActive 
                       ? "text-primary bg-primary/10" 
                       : "text-muted-foreground hover:text-foreground"
@@ -42,7 +71,7 @@ const Navigation = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Icon size={16} />
-                  <span className="text-sm font-medium hidden md:block">{label}</span>
+                  <span className="text-xs md:text-sm font-medium hidden sm:block">{label}</span>
                 </motion.div>
                 
                 {isActive && (
@@ -52,7 +81,7 @@ const Navigation = () => {
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
-              </Link>
+              </button>
             );
           })}
         </div>
