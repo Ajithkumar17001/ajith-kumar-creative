@@ -45,13 +45,13 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-auto"
+      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-[90vw]"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="glass-card px-4 py-3 mx-4">
-        <div className="flex space-x-2 md:space-x-6">
+      <div className="glass-card px-3 md:px-4 py-3 mx-2 md:mx-4">
+        <div className="flex justify-center space-x-1 md:space-x-4 lg:space-x-6">
           {navItems.map(({ id, label, icon: Icon }) => {
             const isActive = activeSection === id;
             
@@ -62,7 +62,7 @@ const Navigation = () => {
                 className="relative group"
               >
                 <motion.div
-                  className={`flex items-center space-x-1 md:space-x-2 px-2 md:px-3 py-2 rounded-lg transition-smooth ${
+                  className={`flex items-center space-x-1 md:space-x-2 px-1.5 md:px-2 lg:px-3 py-2 rounded-lg transition-smooth ${
                     isActive 
                       ? "text-primary bg-primary/10" 
                       : "text-muted-foreground hover:text-foreground"
@@ -70,7 +70,7 @@ const Navigation = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Icon size={16} />
+                  <Icon size={14} className="md:w-4 md:h-4" />
                   <span className="text-xs md:text-sm font-medium hidden sm:block">{label}</span>
                 </motion.div>
                 

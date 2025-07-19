@@ -12,7 +12,7 @@ const Projects = () => {
       tool: "Articulate Storyline",
       description: "Interactive snake game with scoring and keyboard/button control",
       link: "https://360.articulate.com/review/content/027837f0-77e4-492d-9848-8bd89d7a30c0/review",
-      icon: Play,
+      image: "/lovable-uploads/c5ac92e5-dd48-4879-b9bb-9986c3fbed07.png",
       gradient: "from-purple-primary/20 to-purple-secondary/20"
     },
     {
@@ -100,15 +100,18 @@ const Projects = () => {
                     transition: { duration: 0.3, ease: "easeOut" }
                   }}
                 >
-                  {/* Project Thumbnail/Icon */}
-                  <div className={`relative h-48 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center mb-6 overflow-hidden`}>
-                    <motion.div
-                      className="relative z-10"
+                  {/* Project Thumbnail */}
+                  <div className="relative h-48 rounded-xl mb-6 overflow-hidden">
+                    <motion.img
+                      src={project.image || `/api/placeholder/400/240?text=${encodeURIComponent(project.title)}`}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
-                    >
-                      <Icon className="w-16 h-16 text-primary" />
-                    </motion.div>
+                    />
+                    
+                    {/* Overlay gradient */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
                     
                     {/* Glowing border effect on hover */}
                     <motion.div

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Download, Linkedin, ExternalLink, FolderOpen, Award, FileText, Mail, Send } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import ParticleBackground from "@/components/ParticleBackground";
-import Laptop3D from "@/components/Laptop3D";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,7 +39,7 @@ const Index = () => {
       tool: "Articulate Storyline",
       description: "Interactive snake game with scoring and keyboard/button control",
       link: "https://360.articulate.com/review/content/027837f0-77e4-492d-9848-8bd89d7a30c0/review",
-      image: "/placeholder.svg" // Will be updated when images are provided
+      image: "/lovable-uploads/c5ac92e5-dd48-4879-b9bb-9986c3fbed07.png"
     },
     {
       title: "Corporate Explainer Video",
@@ -297,27 +297,12 @@ const Index = () => {
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-                <Laptop3D />
+                {/* 3D element removed */}
               </div>
             </motion.div>
           </div>
         </div>
         
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-muted-foreground text-sm text-center cursor-pointer"
-            onClick={() => scrollToSection("about")}
-          >
-            Scroll to explore
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* About Section */}
